@@ -26,7 +26,7 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 
 The goal of this paper is to allow recursive data structure definitions
 with STL containers, while to make the STL container instantiations well-formed
-even when some of the template parameters are incomplete types (in contrast to
+even when some of the template arguments are incomplete types (in contrast to
 17.6.4.8/2) is an approach to achieve the goal without breaking any language
 restrictions or existing practices.
 
@@ -89,6 +89,68 @@ specialization is not well-formed.
 
 
 ## Technical Specifications
+
+This specification only covers 1) in
+[Impact on the Standard](#impact_on_the_standard); 2) and 3) are merely wording
+details.
+
+#### Hash completeness requirements
+
+A type `H` satisfies the Hash completeness requirements if:
+
+ - it is a function object type,
+ - it is a complete type, and
+ - `h(k)` is well formed when treated as an unevaluated operand.
+
+*\[Just a note:* `h` and `k` are defined in 17.6.3.4  *--end note\]*
+
+
+#### Allocator completeness requirements
+
+A type `X` satisfies the Allocator completeness requirements if:
+
+ - it is a complete type, and
+ - `X::value_type` is defined and identical to `T`.
+
+*\[Just a note:* If
+[LWG 2311](http://cplusplus.github.io/LWG/lwg-active.html#2311) is applied,
+this section may no longer be needed.  *--end note\]*
+
+
+#### Sequence containers
+
+A sequence container with an `Allocator` template parameter is a complete type
+if:
+
+ - the argument of `Allocator` satisfies the Allocator completeness
+   requirements.
+
+
+#### Associative containers
+
+An associative container is a complete type if:
+
+ - the argument of `Compare` is a complete type, and
+ - the argument of `Allocator` satisfies the Allocator completeness
+   requirements.
+
+
+#### Unordered associative containers
+
+An unordered associative container is a complete type if:
+
+ - the argument of `Hash` satisfies the Hash completeness requirements,
+ - the argument of `Pred` is a complete type, and
+ - the argument of `Alloc` satisfies the Allocator completeness
+   requirements.
+
+
+#### Container adaptors
+
+ - the argument of `Compare` is a complete type, if any, and
+ - the argument of `Container` is a complete type, and `Container::size_type`
+   is a complete type.
+
 
 ## Sample Implementation
 
