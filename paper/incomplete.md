@@ -46,7 +46,47 @@ advantages:
 
 ## Impact on the Standard
 
+ 1. An additional "Completeness" requirement for each category of the
+    containers -- Sequence, Associative, Unordered associative, and Container
+    adaptors, plus the Hash requirements and Allocator requirements.
+
+ 2. Require the unspecialized and transparent function objects (`std::less<T>`
+    and `std::less<>`, for example, respectively) to be complete types
+    unconditionally.
+
+ 3. Require `std::allocator<T>` to unconditionally satisfy the "Allocator
+    completeness requirements" in 1).
+
+2) and 3) are trivial to the existing implementations, but not 1).  Some
+changes involve ABI breakages, and some changes result in less compile-time
+checking, but run-time performance will not be affected (interestingly, the
+situation is similar to that of the SCARY iterators`[3]`, as well as some
+techniques we are using, plus some goals we want to achieve from a type
+system's point of view).
+
+Currently,
+
+ * libc++ can fully satisfy the proposed solution after being patched (see
+   [Sample Implementation](#sample_implementation), but with an ABI breakage
+   on `std::deque`;
+
+ * libstdc++ can satisfy the proposed solution with some untested changes made
+   to the unordered associative containers;
+
+ * MSVC STL perfers to perserve some compile-time constants for debugger
+   visualization on `std::deque` (read as "the solution remains unknown"), and
+   is interested in patching `std::list` and `std::forward_list`.
+
+
 ## Design Decisions
+
+The proposed feature set is chosen in a "least common multiple" (of the
+existing implementations) manner.  All the possible (no `std::array`) and
+useful cases are conditionally covered, so that only the standard library
+implementations may be affected, but not user code.  For example, if a
+customized `MyLess` is not a complete type, the whole `std::set<T, MyLess>`
+specialization is not well-formed.
+
 
 ## Technical Specifications
 
