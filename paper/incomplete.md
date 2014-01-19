@@ -59,7 +59,7 @@ advantages:
 
 2) and 3) are trivial to the existing implementations, but not 1).  Some
 changes involve ABI breakages, and some changes result in less compile-time
-checking, but run-time performance will not be affected (interestingly, the
+checking; but run-time performance will not be affected (interestingly, the
 situation is similar to that of the SCARY iterators, as well as some
 techniques we are using, plus some goals we want to achieve from a type
 system's point of view).
@@ -83,7 +83,7 @@ Currently,
 The proposed feature set is chosen in a "least common multiple" (of the
 existing implementations) manner.  All the possible (no `std::array`) and
 useful cases are conditionally covered, so that only the standard library
-implementations may be affected, but not user code.  For example, if a
+implementations may be affected, but not existing user code.  For example, if a
 customized `MyLess` is not a complete type, the whole `std::set<T, MyLess>`
 specialization is not well-formed.
 
@@ -147,14 +147,14 @@ An unordered associative container is a complete type if:
 
 #### Container adaptors
 
- - the argument of `Compare` is a complete type, if any, and
+ - the argument of `Compare`, if any, is a complete type, and
  - the argument of `Container` is a complete type, and `Container::size_type`
    is a complete type.
 
 
 ## Sample Implementation
 
-The proposed solution has been implemented (as a llvm/libc++ fork) and well-
+The proposed solution has been implemented (as an llvm/libc++ fork) and well-
 tested: <https://github.com/lichray/libcxx/tree/container_incomplete>
 
 
