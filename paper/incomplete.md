@@ -60,7 +60,7 @@ advantages:
 2) and 3) are trivial to the existing implementations, but not 1).  Some
 changes involve ABI breakages, and some changes result in less compile-time
 checking, but run-time performance will not be affected (interestingly, the
-situation is similar to that of the SCARY iterators`[3]`, as well as some
+situation is similar to that of the SCARY iterators, as well as some
 techniques we are using, plus some goals we want to achieve from a type
 system's point of view).
 
@@ -159,3 +159,11 @@ tested: <https://github.com/lichray/libcxx/tree/container_incomplete>
 
 
 ## References
+
+`[1]` Austern, Matthew H.  _The Standard Librarian: Containers of Incomplete
+      Types_.
+      <http://www.drdobbs.com/the-standard-librarian-containers-of-inc/184403814>
+
+`[2]` _Main features: Containers of Incomplete Types_.
+      "Boost.Container"
+      <http://www.boost.org/doc/libs/1_55_0/doc/html/container/main_features.html#container.main_features.containers_of_incomplete_types>
