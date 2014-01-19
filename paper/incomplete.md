@@ -167,3 +167,9 @@ tested: <https://github.com/lichray/libcxx/tree/container_incomplete>
 `[2]` _Main features: Containers of Incomplete Types_.
       "Boost.Container"
       <http://www.boost.org/doc/libs/1_55_0/doc/html/container/main_features.html#container.main_features.containers_of_incomplete_types>
+
+
+## Acknowledgments
+
+Thanks to the library implementers who helped refine the idea, run my crappy
+test code, and review the patches publicly and/or privately.
