@@ -50,22 +50,53 @@ already support the proposed solution.
  3. Require `std::allocator<T>` to unconditionally satisfy the "Allocator
     completeness requirements" defined in 2).
 
-
-#### Allocator completeness requirements
-
-A type `X` satisfies the Allocator completeness requirements if:
-
- - it is a complete type, and
- - `X::value_type` is defined and identical to `T`.
+Note that no change is needed for `scoped_allocator_adaptor`, since the
+allocators passed as template arguments are complete types if they satisfy 2).
 
 
-#### Sequence containers
+## Wording
 
-A sequence container with an `Allocator` template parameter is a complete type
-if:
+This wording is relative to N3936.
 
- - the argument of `Allocator` satisfies the Allocator completeness
-   requirements.
+New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
+
+> #### 17.6.3.5.1 Allocator completeness requirements &#91;allocator.requirements.completeness&#93;
+>
+> A library component may want to query the information about an allocation
+> model for type `T` even if `T` is an incomplete type.  In such a case, the
+> library describes a set of requirements that can be placed on an allocator
+> class for type `T` and be observed by the component.
+>
+> An allocator class for type `T` satisfies the Allocator completeness
+> requirements if:
+>
+>  - it is a complete type, and
+>  - defines a nested type `value_type` as a synonym for `T`.
+
+New paragraph in 20.7.9 &#91;default.allocator&#93;, before the synopsis, as
+the first paragraph:
+
+> All specializations of the default allocator satisfy the Allocator
+> completeness requirements (17.6.3.5.1).
+
+New paragraph in 23.3.4.1 &#91;forwardlist.overview&#93;, as paragraph 4:
+
+> A `forward_list<T, Allocator>` is a complete type if the actual template
+> argument
+> for `Allocator` satisfies the Allocator completeness requirements
+> (17.6.3.5.1), regardless of whether `T` is a complete type.
+
+New paragraph in 23.3.5.1 &#91;list.overview&#93;, as paragraph 3:
+
+> A `list<T, Allocator>` is a complete type if the actual template argument
+> for `Allocator` satisfies the Allocator completeness requirements
+> (17.6.3.5.1), regardless of whether `T` is a complete type.
+
+New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
+
+> A `vector<T, Allocator>` is a complete type if the actual template argument
+> for `Allocator` satisfies the Allocator completeness requirements
+> (17.6.3.5.1), regardless of whether `T` is a complete type.
 
 
 ## References
@@ -81,5 +112,7 @@ if:
 
 ## Acknowledgments
 
-Thanks to the library implementers who helped refine the idea, run my crappy
+Thanks to the library implementers who helped refine the idea, run my
 test code, and review the patches publicly and/or privately.
+
+Thanks to Jonathan Wakely, who helped review this paper.
