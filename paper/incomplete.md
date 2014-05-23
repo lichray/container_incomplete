@@ -75,7 +75,9 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 > A type `X` satisfies the Allocator completeness requirements if:
 >
 >  - it is a complete type, and
->  - defines a nested type `value_type` as a synonym for `T`.
+>  - defines a nested type `value_type` as a synonym for `T`, and
+>  - for other nested types defined to satisfy the requirements
+>    of Table 28, if any, the types are complete types.
 
 New paragraph in 20.7.9 &#91;default.allocator&#93;, before the synopsis, as
 the first paragraph:
