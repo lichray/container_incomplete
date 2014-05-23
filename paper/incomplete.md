@@ -64,11 +64,15 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 >
 > A library component may want to query the information about an allocation
 > model for type `T` even if `T` is an incomplete type.  In such a case, the
-> library describes a set of requirements that can be placed on an allocator
-> class for type `T` and be observed by the component.
+> library describes a set of requirements that can be placed on a type `X`,
+> which is deemed to be an allocator class for type `T` after `T` become a
+> complete type, so that the component can query for the minimal information
+> about the allocation model without making the program ill-formed.
+> *\[Note:* The behavior is still undefined (17.6.4.8) if the component is
+> _odr-used_ before `T` become a complete type.
+> *--end note\]*
 >
-> An allocator class for type `T` satisfies the Allocator completeness
-> requirements if:
+> A type `X` satisfies the Allocator completeness requirements if:
 >
 >  - it is a complete type, and
 >  - defines a nested type `value_type` as a synonym for `T`.
