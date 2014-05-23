@@ -127,4 +127,5 @@ New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
 Thanks to the library implementers who helped refine the idea, run my
 test code, and review the patches publicly and/or privately.
 
-Thanks to Jonathan Wakely, who helped review this paper.
+Thanks to Jonathan Wakely, who helped review this paper when he was
+preparing his own paper on the last day of deadline.
