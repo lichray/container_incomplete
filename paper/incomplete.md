@@ -91,24 +91,24 @@ New paragraph in 23.3.4.1 &#91;forwardlist.overview&#93;, as paragraph 4:
 > argument
 > for `Allocator` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), regardless of whether `T` is a complete type.
-> If the `forward_list` is _odr-used_ before `T` becomes a complete type,
-> the behavior is undefined.
+> The actual template argument for `T` may be an incomplete type if
+> it becomes a complete type before the `forward_list` is _odr-used_.
 
 New paragraph in 23.3.5.1 &#91;list.overview&#93;, as paragraph 3:
 
 > A `list<T, Allocator>` is a complete type if the actual template argument
 > for `Allocator` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), regardless of whether `T` is a complete type.
-> If the `list` is _odr-used_ before `T` becomes a complete type,
-> the behavior is undefined.
+> The actual template argument for `T` may be an incomplete type if
+> it becomes a complete type before the `list` is _odr-used_.
 
 New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
 
 > A `vector<T, Allocator>` is a complete type if the actual template argument
 > for `Allocator` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), regardless of whether `T` is a complete type.
-> If the `vector` is _odr-used_ before `T` becomes a complete type,
-> the behavior is undefined.
+> The actual template argument for `T` may be an incomplete type if
+> it becomes a complete type before the `vector` is _odr-used_.
 
 
 ## References
