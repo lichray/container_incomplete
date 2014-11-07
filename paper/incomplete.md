@@ -57,9 +57,9 @@ already support the proposed solution.
 
  1. Conditionally require the targeted containers to be complete types.
 
- 2. Define "allocator completeness requirements" as a dependency of 1).
+ 2. Define "Allocator completeness requirements" as a dependency of 1).
 
- 3. Require `std::allocator<T>` to unconditionally satisfy the "allocator
+ 3. Require `std::allocator<T>` to unconditionally satisfy the "Allocator
     completeness requirements" defined in 2).
 
 Note that no change is needed for `scoped_allocator_adaptor`, since the
@@ -84,7 +84,7 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 > _odr-used_ before `T` becomes a complete type.
 > *--end note\]*
 >
-> A type `X` satisfies the allocator completeness requirements if:
+> A type `X` satisfies the Allocator completeness requirements if:
 >
 >  - it is a complete type, and
 >  - defines a nested type `value_type` as a synonym for `T`, and
@@ -94,26 +94,26 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 New paragraph in 20.7.9 &#91;default.allocator&#93;, before the synopsis, as
 the first paragraph:
 
-> All specializations of the default allocator satisfy the allocator
+> All specializations of the default allocator satisfy the Allocator
 > completeness requirements (17.6.3.5.1).
 
 New paragraph in 23.3.4.1 &#91;forwardlist.overview&#93;, as paragraph 4:
 
-> If an allocator type `A` satisfies the allocator completeness requirements
+> If an allocator type `A` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `forward_list`, as long as `T` is completed before
 > the specialization `forward_list<T, A>` is _odr-used_.
 
 New paragraph in 23.3.5.1 &#91;list.overview&#93;, as paragraph 3:
 
-> If an allocator type `A` satisfies the allocator completeness requirements
+> If an allocator type `A` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `list`, as long as `T` is completed before
 > the specialization `list<T, A>` is _odr-used_.
 
 New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
 
-> If an allocator type `A` satisfies the allocator completeness requirements
+> If an allocator type `A` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `vector`, as long as `T` is completed before
 > the specialization `vector<T, A>` is _odr-used_.
