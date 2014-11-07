@@ -9,7 +9,7 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 
 <table><tbody>
 <tr><th>Doc. no.:</th>	<td>Nxxxx</td></tr>
-<tr><th>Date:</th>	<td>2014-11-04</td></tr>
+<tr><th>Date:</th>	<td>2014-11-07</td></tr>
 <tr><th>Project:</th>	<td>Programming Language C++, Library Working Group</td></tr>
 <tr><th>Reply-to:</th>	<td>Zhihao Yuan &lt;zy at miator dot net&gt;</td></tr>
 </tbody></table>
@@ -18,15 +18,8 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 
 ## Changes since N4056
 
-- The wording for containers is reworked based on LWG's suggestion.
-- Core term is being used in the normative text.
-
-The per-container requirement is not refactored because:
-
-1. The reworked wording is short enough to repeat, and too short to refactor.
-2. The text needs to place a requirement on each template argument, while
-   different categories of containers have different sets of template
-   parameters, which makes the text not able to be as general as expected.
+- The wording is reworked based on LWG's suggestions.
+- The core term "is completed" is being used.
 
 ## Overview
 
@@ -74,22 +67,18 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 
 > #### 17.6.3.5.1 Allocator completeness requirements &#91;allocator.requirements.completeness&#93;
 >
-> A library component may want to query the information about an allocation
-> model for type `T` even if `T` is an incomplete type.  In such a case, the
-> library describes a set of requirements that can be placed on a type `X`,
-> which is deemed to be an allocator class for type `T` after `T` is
-> completed, so that the component can query for the minimal information
-> about the allocation model without making the program ill-formed.
-> *\[Note:* The behavior is still undefined (17.6.4.8) if the component is
-> _odr-used_ before `T` becomes a complete type.
-> *--end note\]*
+> An allocator class for type `T` additionally satisfies
+> the Allocator completeness requirements if the following requirements are
+> satisfied even when `T` is an incomplete type:
 >
-> A type `X` satisfies the Allocator completeness requirements if:
->
->  - it is a complete type, and
->  - defines a nested type `value_type` as a synonym for `T`, and
+>  - The allocator class is a complete type, and
+>  - it defines a nested type `value_type` as a synonym for `T`, and
 >  - for other nested types defined to satisfy the requirements
->    of Table 28, if any, the types are complete types.
+>    of Table 28, if any, these types are complete types.
+>
+> *\[Note:* The behavior is still undefined (17.6.4.8) if such an allocator
+> type is odr-used before `T` is completed.
+> *--end note\]*
 
 New paragraph in 20.7.9 &#91;default.allocator&#93;, before the synopsis, as
 the first paragraph:
@@ -102,21 +91,21 @@ New paragraph in 23.3.4.1 &#91;forwardlist.overview&#93;, as paragraph 4:
 > If an allocator type `A` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `forward_list`, as long as `T` is completed before
-> the specialization `forward_list<T, A>` is _odr-used_.
+> the specialization `forward_list<T, A>` is odr-used.
 
 New paragraph in 23.3.5.1 &#91;list.overview&#93;, as paragraph 3:
 
 > If an allocator type `A` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `list`, as long as `T` is completed before
-> the specialization `list<T, A>` is _odr-used_.
+> the specialization `list<T, A>` is odr-used.
 
 New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
 
 > If an allocator type `A` satisfies the Allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `vector`, as long as `T` is completed before
-> the specialization `vector<T, A>` is _odr-used_.
+> the specialization `vector<T, A>` is odr-used.
 
 ## References
 
