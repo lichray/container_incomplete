@@ -67,14 +67,14 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 
 > #### 17.6.3.5.1 Allocator completeness requirements &#91;allocator.requirements.completeness&#93;
 >
-> An allocator class for type `T` additionally satisfies
+> If `X` is an allocator class for type `T`, `X` additionally satisfies
 > the Allocator completeness requirements if the following requirements are
 > satisfied even when `T` is an incomplete type:
 >
->  - The allocator class is a complete type, and
->  - it defines a nested type `value_type` as a synonym for `T`, and
->  - for other nested types defined to satisfy the requirements
->    of Table 28, if any, these types are complete types.
+>  - `X` is a complete type, and
+>  - for all nested types other than `value_type` defined in
+>    `allocator_traits<X>` to satisfy the required interface (20.7.8),
+>    these types are complete types.
 >
 > *\[Note:* The behavior is still undefined (17.6.4.8) if such an allocator
 > type is odr-used before `T` is completed.
