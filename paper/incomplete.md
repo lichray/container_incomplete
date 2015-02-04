@@ -9,12 +9,12 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 
 <table><tbody>
 <tr><th>Doc. no.:</th>	<td>Nxxxx</td></tr>
-<tr><th>Date:</th>	<td>2014-11-21</td></tr>
+<tr><th>Date:</th>	<td>2015-02-04</td></tr>
 <tr><th>Project:</th>	<td>Programming Language C++, Library Working Group</td></tr>
 <tr><th>Reply-to:</th>	<td>Zhihao Yuan &lt;zy at miator dot net&gt;</td></tr>
 </tbody></table>
 
-# Minimal incomplete type support for standard containers, revision 1
+# Minimal incomplete type support for standard containers, revision 2
 
 ## Changes since N4056
 
@@ -49,9 +49,9 @@ already support the proposed solution.
 
  1. Conditionally require the targeted containers to be complete types.
 
- 2. Define "Allocator completeness requirements" as a dependency of 1).
+ 2. Define "allocator completeness requirements" as a dependency of 1).
 
- 3. Require `std::allocator<T>` to unconditionally satisfy the "Allocator
+ 3. Require `std::allocator<T>` to unconditionally satisfy the "allocator
     completeness requirements" defined in 2).
 
 Note that no change is needed for `scoped_allocator_adaptor`, since the
@@ -67,7 +67,7 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 > #### 17.6.3.5.1 Allocator completeness requirements &#91;allocator.requirements.completeness&#93;
 >
 > If `X` is an allocator class for type `T`, `X` additionally satisfies
-> the Allocator completeness requirements if the following requirements are
+> the allocator completeness requirements if the following requirements are
 > satisfied even when `T` is an incomplete type:
 >
 >  - `X` is a complete type, and
@@ -81,26 +81,26 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 New paragraph in 20.7.9 &#91;default.allocator&#93;, before the synopsis, as
 the first paragraph:
 
-> All specializations of the default allocator satisfy the Allocator
+> All specializations of the default allocator satisfy the allocator
 > completeness requirements (17.6.3.5.1).
 
 New paragraph in 23.3.4.1 &#91;forwardlist.overview&#93;, as paragraph 4:
 
-> If an allocator type `A` satisfies the Allocator completeness requirements
+> If an allocator type `A` satisfies the allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `forward_list`, as long as `T` is completed before
 > the specialization `forward_list<T, A>` is odr-used.
 
 New paragraph in 23.3.5.1 &#91;list.overview&#93;, as paragraph 3:
 
-> If an allocator type `A` satisfies the Allocator completeness requirements
+> If an allocator type `A` satisfies the allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `list`, as long as `T` is completed before
 > the specialization `list<T, A>` is odr-used.
 
 New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
 
-> If an allocator type `A` satisfies the Allocator completeness requirements
+> If an allocator type `A` satisfies the allocator completeness requirements
 > (17.6.3.5.1), an incomplete type `T` may be used when instantiating
 > `vector`, as long as `T` is completed before
 > the specialization `vector<T, A>` is odr-used.
