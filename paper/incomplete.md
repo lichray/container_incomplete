@@ -9,7 +9,7 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 
 <table><tbody>
 <tr><th>Doc. no.:</th>	<td>Nxxxx</td></tr>
-<tr><th>Date:</th>	<td>2014-11-07</td></tr>
+<tr><th>Date:</th>	<td>2014-11-21</td></tr>
 <tr><th>Project:</th>	<td>Programming Language C++, Library Working Group</td></tr>
 <tr><th>Reply-to:</th>	<td>Zhihao Yuan &lt;zy at miator dot net&gt;</td></tr>
 </tbody></table>
@@ -18,8 +18,7 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 
 ## Changes since N4056
 
-- The wording is reworked based on LWG's suggestions.
-- The core term "is completed" is being used.
+- Wording reworked.
 
 ## Overview
 
@@ -72,12 +71,11 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 > satisfied even when `T` is an incomplete type:
 >
 >  - `X` is a complete type, and
->  - for all nested types other than `value_type` defined in
->    `allocator_traits<X>` to satisfy the required interface (20.7.8),
->    these types are complete types.
+>  - Each member type of `allocator_traits<X>` specified in 20.7.8.1, other
+>    than `value_type`, is a complete type.
 >
-> *\[Note:* The behavior is still undefined (17.6.4.8) if such an allocator
-> type is odr-used before `T` is completed.
+> *\[Note:* The behavior is undefined (17.6.4.8) if the completeness of such
+> an allocator type is required before `T` is completed.
 > *--end note\]*
 
 New paragraph in 20.7.9 &#91;default.allocator&#93;, before the synopsis, as
