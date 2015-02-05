@@ -54,29 +54,22 @@ already support the proposed solution.
  3. Require `std::allocator<T>` to unconditionally satisfy the "allocator
     completeness requirements" defined in 2).
 
-Note that no change is needed for `scoped_allocator_adaptor`, since the
-allocators passed as template arguments are complete types if they satisfy 2).
-
 
 ## Wording
 
-This wording is relative to N4140.
+This wording is relative to N4296.
 
 New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 
 > #### 17.6.3.5.1 Allocator completeness requirements &#91;allocator.requirements.completeness&#93;
 >
 > If `X` is an allocator class for type `T`, `X` additionally satisfies
-> the allocator completeness requirements if the following requirements are
-> satisfied even when `T` is an incomplete type:
+> the allocator completeness requirements if:
 >
+>  - `T` may be an incomplete type, and
 >  - `X` is a complete type, and
->  - Each member type of `allocator_traits<X>` specified in 20.7.8.1, other
->    than `value_type`, is a complete type.
->
-> *\[Note:* The behavior is undefined (17.6.4.8) if the completeness of such
-> an allocator type is required before `T` is completed.
-> *--end note\]*
+>  - all the member types of `allocator_traits<X>` specified in 20.7.8.1
+>    other than `value_type` are complete types.
 
 New paragraph in 20.7.9 &#91;default.allocator&#93;, before the synopsis, as
 the first paragraph:
@@ -86,24 +79,24 @@ the first paragraph:
 
 New paragraph in 23.3.4.1 &#91;forwardlist.overview&#93;, as paragraph 4:
 
-> If an allocator type `A` satisfies the allocator completeness requirements
-> (17.6.3.5.1), an incomplete type `T` may be used when instantiating
-> `forward_list`, as long as `T` is completed before
-> the specialization `forward_list<T, A>` is odr-used.
+> An incomplete type `T` may be used when instantiating `forward_list` if the
+> allocator satisfies the allocator completeness requirements (17.6.3.5.1).
+> `T` shall be complete before any member of the resulting specialization of
+> `forward_list` is referenced.
 
 New paragraph in 23.3.5.1 &#91;list.overview&#93;, as paragraph 3:
 
-> If an allocator type `A` satisfies the allocator completeness requirements
-> (17.6.3.5.1), an incomplete type `T` may be used when instantiating
-> `list`, as long as `T` is completed before
-> the specialization `list<T, A>` is odr-used.
+> An incomplete type `T` may be used when instantiating `list` if the
+> allocator satisfies the allocator completeness requirements (17.6.3.5.1).
+> `T` shall be complete before any member of the resulting specialization of
+> `list` is referenced.
 
 New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
 
-> If an allocator type `A` satisfies the allocator completeness requirements
-> (17.6.3.5.1), an incomplete type `T` may be used when instantiating
-> `vector`, as long as `T` is completed before
-> the specialization `vector<T, A>` is odr-used.
+> An incomplete type `T` may be used when instantiating `vector` if the
+> allocator satisfies the allocator completeness requirements (17.6.3.5.1).
+> `T` shall be complete before any member of the resulting specialization of
+> `vector` is referenced.
 
 ## References
 
