@@ -19,6 +19,7 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 ## Changes since N4056
 
 - Wording reworked.
+- Rationale of the wording is added.
 
 ## Overview
 
@@ -97,6 +98,60 @@ New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
 > allocator satisfies the allocator completeness requirements (17.6.3.5.1).
 > `T` shall be complete before any member of the resulting specialization of
 > `vector` is referenced.
+
+## Wording Rationale
+
+### Allocator completeness requirements
+
+Let `X` be an allocator type for `T`.
+
+"`T` may be an incomplete type" revokes &#91;res.on.function&#93;/2.5.
+`T` could be a type which is not yet complete, or a type which cannot be
+incomplete, e.g. `int`.
+
+"`X` is a complete type" is unconditional regarding to the completeness
+of `T`.  `X` could be `X<T>`, `X<T, Args...>`, or even a
+non-template class `IntAllocator`.  The completeness is required because
+a container may store an instance of the allocator.
+
+"all the member types of `allocator_traits<X>`... other than `value_type`
+are complete types" allows a container to query minimal information from
+the allocator type to finish the class definition.  For a non-template
+container, the class definition must not require a complete `T` if `T`
+could be incomplete; for a specialization  the outcome of the rule is more
+"flexible", since the separately-instantiated entities do not require a
+complete `T` when the specialization is implicitly instantiated.
+
+### Container incomplete type support
+
+Let `C` be a sequence container.
+
+"An incomplete type `T` may be used..." revokes &#91;res.on.function&#93;/2.5.
+The rule is unconditional regarding to the completeness of `T`.  If the rule
+is extended to cover associative/hash containers, the rule may be
+unconditional regarding to the completeness of `K` and/or `V`.
+
+"... if the allocator satisfies the allocator completeness requirements"
+ensures that the specialization can be instantiated from a user's point of
+view; extra template parameters or meta-programming within the class
+definition must not make the instantiation ill-formed.
+If the rule is extended to cover associative/hash
+containers, the rule may be conditional regarding to the completeness
+requirements on other template parameters, e.g. `Compare` and `Hash`, as well.
+
+"`T` shall be complete before any member of the resulting specialization...
+is referenced." avoids ill-formed programs caused by instantiating
+separately-instantiated entities before `T` is complete.  It seldom happens
+for a typical recursive definition use case, but if a user try the following,
+
+    struct NT
+    {
+        C<T> ct;
+    };
+
+, he/she has a chance to reference, for example, the default constructor of
+`C<T>` after the definition of `NT`, while this rule requires `T` to be
+completed before the default constructor is referenced.
 
 ## References
 
