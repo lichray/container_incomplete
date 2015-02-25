@@ -9,13 +9,18 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 
 <table><tbody>
 <tr><th>Doc. no.:</th>	<td>Nxxxx</td></tr>
-<tr><th>Date:</th>	<td>2015-02-04</td></tr>
-<tr><th>Revises:</th>	<td>N4056</td></tr>
+<tr><th>Date:</th>	<td>2015-02-24</td></tr>
 <tr><th>Project:</th>	<td>Programming Language C++, Library Working Group</td></tr>
+<tr><th>Revises:</th>	<td>N4371</td></tr>
 <tr><th>Reply-to:</th>	<td>Zhihao Yuan &lt;zy at miator dot net&gt;</td></tr>
 </tbody></table>
 
-# Minimal incomplete type support for standard containers, revision 2
+# Minimal incomplete type support for standard containers, revision 3
+
+## Changes since N4371
+
+- Reword a permission within requirements.
+- Relocate the per-container new paragraphs.
 
 ## Changes since N4056
 
@@ -66,9 +71,9 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 > #### 17.6.3.5.1 Allocator completeness requirements &#91;allocator.requirements.completeness&#93;
 >
 > If `X` is an allocator class for type `T`, `X` additionally satisfies
-> the allocator completeness requirements if:
+> the allocator completeness requirements if, whether or not `T` is a complete
+> type:
 >
->  - `T` may be an incomplete type, and
 >  - `X` is a complete type, and
 >  - all the member types of `allocator_traits<X>` specified in 20.7.8.1
 >    other than `value_type` are complete types.
@@ -79,21 +84,24 @@ the first paragraph:
 > All specializations of the default allocator satisfy the allocator
 > completeness requirements (17.6.3.5.1).
 
-New paragraph in 23.3.4.1 &#91;forwardlist.overview&#93;, as paragraph 4:
+New paragraph in 23.3.4.1 &#91;forwardlist.overview&#93;, as paragraph 4,
+after the synopsis:
 
 > An incomplete type `T` may be used when instantiating `forward_list` if the
 > allocator satisfies the allocator completeness requirements (17.6.3.5.1).
 > `T` shall be complete before any member of the resulting specialization of
 > `forward_list` is referenced.
 
-New paragraph in 23.3.5.1 &#91;list.overview&#93;, as paragraph 3:
+New paragraph in 23.3.5.1 &#91;list.overview&#93;, as paragraph 3,
+after the synopsis:
 
 > An incomplete type `T` may be used when instantiating `list` if the
 > allocator satisfies the allocator completeness requirements (17.6.3.5.1).
 > `T` shall be complete before any member of the resulting specialization of
 > `list` is referenced.
 
-New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
+New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3,
+after the synopsis:
 
 > An incomplete type `T` may be used when instantiating `vector` if the
 > allocator satisfies the allocator completeness requirements (17.6.3.5.1).
@@ -106,13 +114,14 @@ New paragraph in 23.3.6.1 &#91;vector.overview&#93;, as paragraph 3:
 
 Let `X` be an allocator type for `T`.
 
-"`T` may be an incomplete type" revokes &#91;res.on.function&#93;/2.5.
-`T` could be a type which is not yet complete, or a type which cannot be
-incomplete, e.g. `int`.
-
-"`X` is a complete type" is unconditional regarding to the completeness
-of `T`.  `X` could be `X<T>`, `X<T, Args...>`, or even a
-non-template class `IntAllocator`.  The completeness is required because
+"whether or not `T` is a complete type...
+`X` is a complete type" is unconditional regarding to the completeness
+of `T`, which
+could be a type which is not yet complete, or a type which cannot be
+incomplete, e.g. `int`,
+while `X` may be `X<T>`, `X<T, Args...>`, or even a
+non-template class `IntAllocator`.  The completeness of `X` is required
+because
 a container may store an instance of the allocator.
 
 "all the member types of `allocator_traits<X>`... other than `value_type`
