@@ -9,13 +9,17 @@ del { text-decoration: line-through; background-color: #FFA0A0 }
 
 <table><tbody>
 <tr><th>Doc. no.:</th>	<td>Nxxxx</td></tr>
-<tr><th>Date:</th>	<td>2015-02-24</td></tr>
+<tr><th>Date:</th>	<td>2015-05-05</td></tr>
 <tr><th>Project:</th>	<td>Programming Language C++, Library Working Group</td></tr>
-<tr><th>Revises:</th>	<td>N4371</td></tr>
+<tr><th>Revises:</th>	<td>N4390</td></tr>
 <tr><th>Reply-to:</th>	<td>Zhihao Yuan &lt;zy at miator dot net&gt;</td></tr>
 </tbody></table>
 
-# Minimal incomplete type support for standard containers, revision 3
+# Minimal incomplete type support for standard containers, revision 4
+
+## Changes since N4390
+
+- Cross-reference section 20.7.8.
 
 ## Changes since N4371
 
@@ -64,7 +68,7 @@ already support the proposed solution.
 
 ## Wording
 
-This wording is relative to N4296.
+This wording is relative to N4431.
 
 New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 
@@ -75,7 +79,7 @@ New section 17.6.3.5.1 &#91;allocator.requirements.completeness&#93;:
 > type:
 >
 >  - `X` is a complete type, and
->  - all the member types of `allocator_traits<X>` specified in 20.7.8.1
+>  - all the member types of `allocator_traits<X>` (20.7.8)
 >    other than `value_type` are complete types.
 
 New paragraph in 20.7.9 &#91;default.allocator&#93;, before the synopsis, as
